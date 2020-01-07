@@ -2,16 +2,13 @@ import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 //All or most actions needed for app
 //actions needed - handleChange, get info, login and logout, add to cart, remove from cart, get farm info, get produce
-
-export const handleChange = e => {
-  dispatchEvent({
-    type: HANDLE_CHANGE,
-    payload: {
-      name: e.target.name,
-      value: e.target.value
-    }
-  });
-};
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAILURE = "LOGIN_FAILURE";
+const ADD_TO_CART = "ADD_TO_CART";
+const REMOVE_FROM_CART = "REMOVE_FROM_CART"
+const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
+const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
+const UPDATE_INVENTORY = "UPDATE_INVENTORY";
 
 export const userInfo = () => dispatch => {
   const getUserInfo =
@@ -42,7 +39,7 @@ export const login = state=> dispatch=>{
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('isGrower', state.grower);
         dispatch({
-            type: LOGIN_USER,
+            type: LOGIN_SUCCESS,
             payload:{data: res.data, grower: state.grower}
         })
         return true
@@ -50,7 +47,7 @@ export const login = state=> dispatch=>{
     .catch(err=>{
         console.log ('cj: login failure', err),
         dispatch({
-            type: LOGIN_FAILED,
+            type: LOGIN_FAILURE,
             payload: err
         })
         return false
