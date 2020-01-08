@@ -3,9 +3,9 @@ import Produce from './Produce';
 import {connect} from 'react-redux';
 import {getProduce} from '../Actions/Actions';
 
-const ProduceList = props =>{
+const ProduceList = props => {
     useEffect(()=>{
-        props.getProduce();
+        props.getProduce(props.produce);
         console.log('cj: getting greenery', props.produce);
     }, []);
 
@@ -18,10 +18,8 @@ const ProduceList = props =>{
     )
 }
 
-const mapStateToProps = state =>{
-    return{
-        produce: state.produce
-    };
-};
+const mapStateToProps = state => ({
+    produce: state.produce
+});
 
 export default connect(mapStateToProps, {getProduce})(ProduceList);
