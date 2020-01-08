@@ -2,10 +2,12 @@ export const initialState = {user: {name: "", grower: false, cart: []}, produce:
 
 export const reducer = (state=initialState, action) => {
   switch(action.type) {
-    "LOGIN_SUCCESS":
+    case "LOGIN_SUCCESS":
       return {...state, user: action.payload};
-    "LOGIN_FAILURE":
+    case "LOGIN_FAILURE":
       return state;
+    case "ADD_TO_CART":
+      return {}
     default:
       return state;
   }
