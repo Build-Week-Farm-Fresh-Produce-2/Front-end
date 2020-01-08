@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import ShoppingContext from "../Contexts/ShoppingContext";
+import React from "react";
+import { connect } from "react-redux";
 import Item from "./ShoppingCartItem";
+import { addToCart, removeCart} from "../Actions/Actions";
 
-export default function ShoppingCart() {
-  const { cart, removeItem } = useContext(ShoppingContext);
-
+const ShoppingCart = props => {
+  const cart = props.cart;
   const orderTotal = () => {
     return cart
       .reduce((acc, value) => {
@@ -16,7 +16,7 @@ export default function ShoppingCart() {
   return (
     <Cart>
       {cart.map(item => (
-        <Item key={item.id} removeItem={removeItem} {...item} />
+        <Item key={item.id} removeCart={props.removeCart} {...item} />
       ))}
 
       <div>
@@ -25,4 +25,10 @@ export default function ShoppingCart() {
       </div>
     </Cart>
   );
-}
+};
+
+mapStateToProps = state => ({
+  cart: state.cart
+});
+
+export default connect(mapStateToProps, { addToCart, removeCart })(ShoppingCart);

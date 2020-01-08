@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
-import ShoppingContext from "../Contexts/ShoppingContext";
+import React from "react";
 
 const Item = props => {
-  const { removeItem } = useContext(ShoppingContext);
-
+  const item = props.item;
   return (
     <div className="cart">
       <div classname="produce-pic"></div>
-      <h3>{props.name}</h3>
-      <p>${props.price}</p>
-      <p>{props.amount}</p>
-      <button onClick ={()=> removeItem(props.id)}>Remove</button>
+      <h3>{item.name}</h3>
+      <p>${item.price}</p>
+      <p>{item.amount}</p>
+      <button onClick={() => item.removeCart(item.id)}>Remove</button>
     </div>
   );
 };
 
-export default Item
+export default Item;
