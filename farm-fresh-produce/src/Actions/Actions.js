@@ -9,6 +9,7 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART"
 const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
 const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
 const UPDATE_INVENTORY = "UPDATE_INVENTORY";
+const GET_PRODUCE = "GET_PRODUCE";
 
 export const userInfo = () => dispatch => {
   const getUserInfo =
