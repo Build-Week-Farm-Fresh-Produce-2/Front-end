@@ -1,13 +1,22 @@
 import React from 'react';
-import './App.css';
+import {connect} from 'react-redux';
 //react-router
 
-function App() {
+import './App.css';
+
+import Dashboard from './Components/Dashboard';
+
+function App(props) {
   return (
     <div className="App">
-      <h1>It's Working!!!</h1>
+      <h1>Farm Fresh Produce</h1>
+      <Dashboard user={props.user} />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps, {})(App);
