@@ -1,4 +1,4 @@
-export const initialState = {user: {name: "", grower: true}, cart: [], produce: [{name: "lemon", id: 0}]};
+export const initialState = {uid: 0, user: {name: "", grower: true}, cart: [], produce: [{name: "lemon", id: 0}]};
 
 export const reducer = (state=initialState, action) => {
   switch(action.type) {

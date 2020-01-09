@@ -16,8 +16,8 @@ function Nav(props) {
         */}
         <Link to="/shop">Shop</Link>
         <Link to="/cart">Cart</Link>
-        {props.user.grower ? <Link to="/dashboard">Dashboard</Link> : null}
-        {!props.user ? <Link to="/login">Login</Link> : null}
+        {props.user.isGrower ? <Link to="/dashboard">Dashboard</Link> : null}
+        {props.user ? <Link to="/login">Login</Link> : null}
           
       </nav>
     </div>
@@ -29,13 +29,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {})(Nav);
-
-
-          // <Users>
-          //   <Route exact path={`/register`}>
-          //     Sign Up
-          //   </Route>
-          //   <Route exact path={`/signin`}>
-          //     Log In
-          //   </Route>
-          // </Users>

@@ -2,8 +2,8 @@ import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 //All or most actions needed for app
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
-// const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-// const LOGIN_FAILURE = "LOGIN_FAILURE";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAILURE = "LOGIN_FAILURE";
 const GET_PRODUCE = "GET_PRODUCE";
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
@@ -55,6 +55,20 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 //     })
 // }
 
+export const login = (userData) => dispatch => {
+  axiosWithAuth()
+    .post("/auth/login", userData)
+    .then(res => {
+      console.log(res);
+      localStorage.setItem("Authorization", res.data.token);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: 1//res.data.id;
+      })
+    })
+    .catch(err => console.log(err));
+}
+
 export const getProduce = (produce) => dispatch => {
   // TODO: axiosWithAuth.get
   // All of the farmers! All of their Inventories! 
@@ -66,7 +80,13 @@ export const getProduce = (produce) => dispatch => {
         payload: produce
       })
     })
-    .catch(err => console.log(err.message))
+    .catch(err => {
+      console.log(err.message);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: err
+      })
+    })
 }
 
 export const getCart = (uid) => dispatch => {
