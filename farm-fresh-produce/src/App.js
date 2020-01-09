@@ -5,12 +5,14 @@ import {connect} from 'react-redux';
 import './App.css';
 
 import Dashboard from './Components/Dashboard';
+import Login from './Components/Login';
 
 function App(props) {
   return (
     <div className="App">
       <h1>Farm Fresh Produce</h1>
       <Link to="dashboard">Dashboard</Link>
+      <Route path="/login"><Login /></Route>
       <Route path="/dashboard"><Dashboard user={props.user} /></Route>
     </div>
   );

@@ -1,19 +1,16 @@
 import React from 'react';
-// TODO: set up react-router!!
-// import { Link }
-import { connect } from "react-redux";
+import { Link, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import ProduceList from './ProduceList';
 
 const Buyer = (props) => {
   return (
     <div>
       <nav>
-        <a href="#">View Cart</a>
-        <a href="#">Checkout</a>
-      </nav>
-      {        
-      <ProduceList />
-      }
+        <Link to="/cart">View Cart</Link>
+        <Link to="/checkout">Checkout</Link>
+      </nav>       
+      <Route path="/shop" component={ProduceList} />
     </div>
   )
 }

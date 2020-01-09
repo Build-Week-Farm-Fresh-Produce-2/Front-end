@@ -1,19 +1,19 @@
 import React from 'react';
-// TODO: set up react-router!!
-// import { Link }
+import { Link, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 import Inventory from './Inventory';
+import Orders from './Orders';
 
 const Farmer = (props) => {
   return (
     <div>
       <nav>
-        <a href="#">View Orders</a>
-        <a href="#">Shop</a>
+        <Link to="/dashboard/orders">View Orders</Link>
+        <Link to="/dashboard/inventory">View Inventory</Link>
+        <Link to="/shop">Shop</Link>
       </nav>
-      {
-        // <Inventory />
-      }
+      <Route path="/inventory" component={Inventory} />
+      <Route path="/orders" component={Orders} />
     </div>
   )
 }
