@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosWithAuth from "../Utils/axiosWithAuth";
+import {axiosWithAuth} from "../Utils/axiosWithAuth";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -36,7 +36,7 @@ const SignUp = () => {
       .validate(userState, { abortEarly: false })
       .then(function(value) {
         axiosWithAuth()
-          .put("/api/data", value)
+          .post("/auth/register", value)
           .then(res => console.log(res))
           .catch(err => console.log(err));
       })
@@ -60,7 +60,7 @@ const SignUp = () => {
   };
 
   return (
-    <div class="register-container">
+    <div className="register-container">
       <form onSubmit={handleSubmit}>
         <label>
           Name:
@@ -78,7 +78,7 @@ const SignUp = () => {
             onChange={handleChange}
             type="text"
             name="email"
-            value={userState.name}
+            value={userState.email}
           />
           {errors.email}
         </label>
