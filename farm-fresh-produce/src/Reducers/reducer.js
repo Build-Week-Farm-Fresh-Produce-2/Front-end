@@ -1,4 +1,4 @@
-export const initialState = {user: {name: "", grower: false, cart: []}, produce: [{name: "lemon", id: 0}]};
+export const initialState = {user: {name: "", grower: false}, cart: [], produce: [{name: "lemon", id: 0}]};
 
 export const reducer = (state=initialState, action) => {
   switch(action.type) {
@@ -8,6 +8,8 @@ export const reducer = (state=initialState, action) => {
       return state;
     case "GET_PRODUCE":
       return {...state, produce: action.payload};
+    case "GET_CART":
+      return {...state, cart: action.payload};
     case "ADD_TO_CART":
       return {...state, user: {...state.user, cart: [...state.user.cart, action.payload]}};
     case "REMOVE_FROM_CART":

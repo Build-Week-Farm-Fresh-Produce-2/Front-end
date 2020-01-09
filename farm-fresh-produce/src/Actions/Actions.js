@@ -1,10 +1,11 @@
-// import { axiosWithAuth } from "../Utils/axiosWithAuth";
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 //All or most actions needed for app
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
 // const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 // const LOGIN_FAILURE = "LOGIN_FAILURE";
 const GET_PRODUCE = "GET_PRODUCE";
+const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 // const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
@@ -56,10 +57,23 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export const getProduce = (produce) => dispatch => {
   // TODO: axiosWithAuth.get
+  // All of the farmers! All of their Inventories! 
   dispatch({
     type: GET_PRODUCE,
     payload: produce
   })
+}
+
+export const getCart = (uid) => dispatch => {
+  axiosWithAuth()
+    .get(`/users/${uid}/cart`)
+    .then(res => {
+      console.log("Getting Cart", res)
+      dispatch({
+        type: GET_CART,
+        payload: res.data.cart
+      })
+    })
 }
 
 export const addToCart = (item) => dispatch =>{

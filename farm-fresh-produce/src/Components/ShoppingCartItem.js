@@ -4,11 +4,12 @@ const Item = props => {
   const item = props.item;
   return (
     <div className="cart">
-      <div classname="produce-pic"></div>
-      <h3>{item.name}</h3>
+      <div className="produce-pic"></div>
+      <h3>{item.item_name}</h3>
+      <p>{item.user_description}</p>
       <p>${item.price}</p>
-      <p>{item.amount}</p>
-      <button onClick={() => item.removeCart(item.id)}>Remove</button>
+      <p>{item.item_quantity}</p>
+      <button onClick={() => props.removeCart(item.id)}>Remove</button>
     </div>
   );
 };
