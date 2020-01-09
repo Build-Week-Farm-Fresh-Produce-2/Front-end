@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function Nav() {
+function Nav(props) {
   return (
     <div>
       {
@@ -9,18 +10,25 @@ export default function Nav() {
       }
       <h1>Market Direct</h1>
       <nav>
-        {/* connect to web 1 */}
+        {/* connect to web 1 
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
-        <Link to="/dashboard">Dashboard</Link>
+        */}
         <Link to="/shop">Shop</Link>
-        <Link to="/cart">View Cart</Link>
-        <Link to="/checkout">Checkout</Link>
-        <Link to="/login">Login</Link>
+        <Link to="/cart">Cart</Link>
+        {props.user.grower ? <Link to="/dashboard">Dashboard</Link> : null}
+        {!props.user ? <Link to="/login">Login</Link> : null}
+          
       </nav>
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps, {})(Nav);
 
 
           // <Users>
