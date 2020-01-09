@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import './App.css';
 
+// ACTIONS
+import { login } from './Actions/Actions';
+
 // COMPONENTS
 import Nav from './Components/Nav';
 import Dashboard from './Components/Dashboard';
@@ -17,7 +20,7 @@ function App(props) {
       <Route path="/" component={Nav} />
       <Route path="/dashboard"><Dashboard user={props.user} /></Route>
       <Route path="/register" component={SignUp} />
-      <Route path="/login" component={Login} />
+      <Route path="/login" ><Login login={props.login} /></Route>
       <Route exact path="/shop" component={ProduceList} />
       <Route exact path="/cart" component={ShoppingCart} />
     </div>
@@ -28,4 +31,4 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {login})(App);

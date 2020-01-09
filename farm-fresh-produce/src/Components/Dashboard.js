@@ -10,8 +10,8 @@ const Dashboard = (props) => {
     <h1>Welcome to Your Dashboard</h1>
       <Link to="/dashboard/orders">View Orders</Link>
       <Link to="/dashboard/inventory">View Inventory</Link>
-      <Route path="/inventory" component={Inventory} />
-      <Route path="/orders" component={Orders} />
+      <Route path="/inventory" Component={Inventory} />
+      <Route path="/orders" Component={Orders} />
     </div>
   )
 }

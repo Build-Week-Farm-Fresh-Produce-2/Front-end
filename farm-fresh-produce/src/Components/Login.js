@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-// import {axiosWithAuth} from "../Utils/axiosWithAuth";
-import { login } from "../Actions/Actions";
-
 
 const Login = (props) => {
   const [userData, setUserData] = useState({
@@ -21,7 +17,7 @@ const Login = (props) => {
       [e.target.name]: e.target.value
     });
   };
-  
+
   return (
     <>
       <form onSubmit={handleLogin}>
@@ -45,8 +41,5 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+export default Login;
 
-}
-
-export default connect(mapStateToProps, {login})(Login);
