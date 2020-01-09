@@ -13,8 +13,6 @@ export default function Nav() {
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
         <Link to="/dashboard">Dashboard</Link>
-        <Link to="/dashboard/orders">View Orders</Link>
-        <Link to="/dashboard/inventory">View Inventory</Link>
         <Link to="/shop">Shop</Link>
         <Link to="/cart">View Cart</Link>
         <Link to="/checkout">Checkout</Link>

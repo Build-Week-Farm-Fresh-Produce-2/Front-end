@@ -1,22 +1,23 @@
 import React from 'react';
-// TODO: set up react-router!!
-// import { Link }
-// import { connect } from "react-redux";
-
-import Buyer from './Buyer';
-import Farmer from './Farmer';
+import { Route, Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import Inventory from './Inventory';
+import Orders from './Orders';
 
 const Dashboard = (props) => {
   return (
     <div>
-      {
-        props.user.grower ?
-        <Farmer /> :
-        <Buyer />
-      }
+    <h1>Welcome to Your Dashboard</h1>
+      <Link to="/dashboard/orders">View Orders</Link>
+      <Link to="/dashboard/inventory">View Inventory</Link>
+      <Route path="/inventory" component={Inventory} />
+      <Route path="/orders" component={Orders} />
     </div>
   )
 }
 
-// export default connect(mapStateToProps, {})(Dashboard);
-export default Dashboard
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps, {})(Dashboard);

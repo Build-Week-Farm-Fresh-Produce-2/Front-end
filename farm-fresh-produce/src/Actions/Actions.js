@@ -58,10 +58,15 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const getProduce = (produce) => dispatch => {
   // TODO: axiosWithAuth.get
   // All of the farmers! All of their Inventories! 
-  dispatch({
-    type: GET_PRODUCE,
-    payload: produce
-  })
+  axiosWithAuth()
+    .get(`/users`) // Fix this
+    .then(res => {
+      dispatch({
+        type: GET_PRODUCE,
+        payload: produce
+      })
+    })
+    .catch(err => console.log(err.message))
 }
 
 export const getCart = (uid) => dispatch => {
@@ -74,6 +79,7 @@ export const getCart = (uid) => dispatch => {
         payload: res.data.cart
       })
     })
+    .catch(err => console.log(err.message))
 }
 
 export const addToCart = (item) => dispatch =>{
