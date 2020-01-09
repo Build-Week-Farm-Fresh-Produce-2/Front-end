@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getProduce} from '../Actions/Actions';
 
 const ProduceList = props => {
-    useEffect(()=>{
+    useEffect((props)=>{
         props.getProduce(props.produce);
         console.log('cj: getting greenery', props.produce);
     }, []);

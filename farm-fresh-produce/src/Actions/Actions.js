@@ -1,15 +1,15 @@
-import { axiosWithAuth } from "../Utils/axiosWithAuth";
+// import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 //All or most actions needed for app
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGIN_FAILURE = "LOGIN_FAILURE";
+// const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+// const LOGIN_FAILURE = "LOGIN_FAILURE";
 const GET_PRODUCE = "GET_PRODUCE";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
-const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
-const UPDATE_INVENTORY = "UPDATE_INVENTORY";
+// const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
+// const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
+// const UPDATE_INVENTORY = "UPDATE_INVENTORY";
 
 // export const userInfo = () => dispatch => {
 //   const getUserInfo =
@@ -54,8 +54,16 @@ const UPDATE_INVENTORY = "UPDATE_INVENTORY";
 //     })
 // }
 
+export const getProduce = (produce) => dispatch => {
+  // TODO: axiosWithAuth.get
+  dispatch({
+    type: GET_PRODUCE,
+    payload: produce
+  })
+}
+
 export const addToCart = (item) => dispatch =>{
-  // TODO: axios.post
+  // TODO: axiosWithAuth.post
   dispatch({
     type: ADD_TO_CART,
     payload: item
@@ -63,17 +71,9 @@ export const addToCart = (item) => dispatch =>{
 };
 
 export const removeCart = (id) => dispatch =>{
-  // TODO: axios.delete
+  // TODO: axiosWithAuth.delete
   dispatch({
     type: REMOVE_FROM_CART,
     payload: id
   });
-}
-
-export const getProduce = (produce) => dispatch => {
-  // TODO: axios.get
-  dispatch({
-    type: GET_PRODUCE,
-    payload: produce
-  })
 }
