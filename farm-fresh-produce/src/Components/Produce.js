@@ -9,9 +9,9 @@ const Produce = props => {
       <p className="price">{item.price}</p>
       <p className="unit">{item.unit}</p>
       <p className="deets">{item.description}</p>
-      {/* <button onClick={() => props.addToCart(props.produce)}>
+      { /* <button onClick={() => props.addToCart(item)}>
         Add to cart
-      </button>       */}
+      </button>     */  }
     </div>
   );
 };
