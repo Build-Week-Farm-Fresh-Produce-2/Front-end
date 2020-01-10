@@ -1,9 +1,9 @@
-export const initialState = {user: {uid: 0, username: "", isGrower: true}, cart: [], produce: [{name: "lemon", id: 0}]};
+export const initialState = {uid: 0, user: {username: "", isGrower: true}, cart: [], produce: [{name: "lemon", id: 0}]};
 
 export const reducer = (state=initialState, action) => {
   switch(action.type) {
     case "LOGIN_SUCCESS":
-      return {...state, user: action.payload};
+      return {...state, uid: action.payload};
     case "LOGIN_FAILURE":
       return state;
     case "GET_PRODUCE":

@@ -60,10 +60,10 @@ export const login = (userData) => dispatch => {
     .post("/auth/login", userData)
     .then(res => {
       console.log(res);
-      localStorage.setItem("Authorization", res.data.token);
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: 1//res.data.id;
+        payload: res.data.id
       })
     })
     .catch(err => console.log(err));
@@ -75,6 +75,7 @@ export const getProduce = (produce) => dispatch => {
   axiosWithAuth()
     .get(`/users`) // Fix this
     .then(res => {
+      console.log(res);
       dispatch({
         type: GET_PRODUCE,
         payload: produce
