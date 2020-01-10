@@ -8,7 +8,7 @@ function Nav(props) {
       {
       //<Logo className="placeholder for logo from Web 1"></Logo>
       }
-      <h1>Market Direct</h1>
+      <h1>Harvest Direct</h1>
       <nav>
         {/* connect to web 1 
         <Link to="/">Home</Link>

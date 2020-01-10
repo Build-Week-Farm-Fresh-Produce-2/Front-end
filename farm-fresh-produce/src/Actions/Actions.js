@@ -4,10 +4,13 @@ import { axiosWithAuth } from "../Utils/axiosWithAuth";
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGIN_FAILURE = "LOGIN_FAILURE";
+// USER
 const GET_PRODUCE = "GET_PRODUCE";
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+// FARMER 
+// const GET_INVENTORY = "GET_INVENTORY";
 // const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
 // const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
 // const UPDATE_INVENTORY = "UPDATE_INVENTORY";
