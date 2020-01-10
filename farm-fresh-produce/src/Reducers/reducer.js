@@ -11,7 +11,7 @@ export const reducer = (state=initialState, action) => {
     case "GET_CART":
       return {...state, cart: action.payload};
     case "ADD_TO_CART":
-      return {...state, user: {...state.user, cart: [...state.user.cart, action.payload]}};
+      return {...state, cart: [...state.cart, action.payload]};
     case "REMOVE_FROM_CART":
       return {...state, user: {...state.user, cart: state.cart.filter(item => item.id !== action.payload)}};
     case "ADD_TO_INVENTORY":

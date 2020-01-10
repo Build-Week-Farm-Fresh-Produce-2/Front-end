@@ -4,16 +4,17 @@ import { axiosWithAuth } from "../Utils/axiosWithAuth";
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGIN_FAILURE = "LOGIN_FAILURE";
+// const GET_USER_DATA = "GET_USER_DATA";
 // USER
 const GET_PRODUCE = "GET_PRODUCE";
 const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 // FARMER 
-// const GET_INVENTORY = "GET_INVENTORY";
-// const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
-// const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
-// const UPDATE_INVENTORY = "UPDATE_INVENTORY";
+const GET_INVENTORY = "GET_INVENTORY";
+const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
+const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
+const UPDATE_INVENTORY_ITEM = "UPDATE_INVENTORY";
 
 // export const userInfo = () => dispatch => {
 //   const getUserInfo =
@@ -72,16 +73,16 @@ export const login = (userData) => dispatch => {
     .catch(err => console.log(err));
 }
 
-export const getProduce = (produce) => dispatch => {
+export const getProduce = () => dispatch => {
   // TODO: axiosWithAuth.get
   // All of the farmers! All of their Inventories! 
   axiosWithAuth()
-    .get(`/users`) // Fix this
+    .get(`/produce`) // Fix this
     .then(res => {
       console.log(res);
       dispatch({
         type: GET_PRODUCE,
-        payload: produce
+        payload: res.data
       })
     })
     .catch(err => {
@@ -119,5 +120,42 @@ export const removeCart = (id) => dispatch =>{
   dispatch({
     type: REMOVE_FROM_CART,
     payload: id
+  });
+}
+
+export const getInventory = (uid) => dispatch => {
+  axiosWithAuth()
+    .get(`/users/${uid}/inventory`)
+    .then(res => {
+      console.log("Getting Inventory", res)
+      dispatch({
+        type: GET_INVENTORY,
+        payload: res.data.inventory
+      })
+    })
+    .catch(err => console.log(err.message))
+}
+
+export const addToInventory = (item) => dispatch =>{
+  // TODO: axiosWithAuth.post
+  dispatch({
+    type: ADD_TO_INVENTORY,
+    payload: item
+  });
+};
+
+export const removeInventory = (id) => dispatch =>{
+  // TODO: axiosWithAuth.delete
+  dispatch({
+    type: REMOVE_FROM_INVENTORY,
+    payload: id
+  });
+}
+
+export const updateInventory = (id) => dispatch =>{
+  // TODO: axiosWithAuth.delete
+  dispatch({
+    type: UPDATE_INVENTORY_ITEM,
+    payload: id //res.data.item
   });
 }
