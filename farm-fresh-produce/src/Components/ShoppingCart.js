@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Item from "./ShoppingCartItem";
-import { addToCart, removeCart} from "../Actions/Actions";
+import { getCart, removeCart} from "../Actions/Actions";
 
 const ShoppingCart = props => {
-  const cart = props.cart;
+  let cart = props.cart
+  const getCart = props.getCart;
   const orderTotal = () => {
     return cart
       .reduce((acc, value) => {
@@ -12,23 +13,25 @@ const ShoppingCart = props => {
       }, 0)
       .toFixed(2);
   };
-
+  useEffect(() => {
+    getCart(1);
+  }, [getCart])
   return (
-    <Cart>
+    <div>
       {cart.map(item => (
-        <Item key={item.id} removeCart={props.removeCart} {...item} />
+        <Item key={item.id} removeCart={props.removeCart} item={item} />
       ))}
 
       <div>
         <p>Total: ${orderTotal()}</p>
         <button>Checkout</button>
       </div>
-    </Cart>
+    </div>
   );
 };
 
-mapStateToProps = state => ({
+const mapStateToProps = state => ({
   cart: state.cart
 });
 
-export default connect(mapStateToProps, { addToCart, removeCart })(ShoppingCart);
+export default connect(mapStateToProps, { getCart, removeCart })(ShoppingCart);

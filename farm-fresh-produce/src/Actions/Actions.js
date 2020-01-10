@@ -1,10 +1,11 @@
-// import { axiosWithAuth } from "../Utils/axiosWithAuth";
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 //All or most actions needed for app
 //actions needed - get info, login and logout, add to cart, remove from cart, get farm info, get produce
-// const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-// const LOGIN_FAILURE = "LOGIN_FAILURE";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAILURE = "LOGIN_FAILURE";
 const GET_PRODUCE = "GET_PRODUCE";
+const GET_CART = "GET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 // const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
@@ -54,12 +55,51 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 //     })
 // }
 
+export const login = (userData) => dispatch => {
+  axiosWithAuth()
+    .post("/auth/login", userData)
+    .then(res => {
+      console.log(res);
+      localStorage.setItem("Authorization", res.data.token);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: 1//res.data.id;
+      })
+    })
+    .catch(err => console.log(err));
+}
+
 export const getProduce = (produce) => dispatch => {
   // TODO: axiosWithAuth.get
-  dispatch({
-    type: GET_PRODUCE,
-    payload: produce
-  })
+  // All of the farmers! All of their Inventories! 
+  axiosWithAuth()
+    .get(`/users`) // Fix this
+    .then(res => {
+      dispatch({
+        type: GET_PRODUCE,
+        payload: produce
+      })
+    })
+    .catch(err => {
+      console.log(err.message);
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: err
+      })
+    })
+}
+
+export const getCart = (uid) => dispatch => {
+  axiosWithAuth()
+    .get(`/users/${uid}/cart`)
+    .then(res => {
+      console.log("Getting Cart", res)
+      dispatch({
+        type: GET_CART,
+        payload: res.data.cart
+      })
+    })
+    .catch(err => console.log(err.message))
 }
 
 export const addToCart = (item) => dispatch =>{

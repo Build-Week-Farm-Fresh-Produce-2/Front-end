@@ -4,14 +4,16 @@ import {connect} from 'react-redux';
 import {getProduce} from '../Actions/Actions';
 
 const ProduceList = props => {
-    useEffect((props)=>{
-        props.getProduce(props.produce);
-        console.log('cj: getting greenery', props.produce);
-    }, []);
+    const getProduce = props.getProduce;
+    const produce = props.produce;
+    useEffect(()=>{
+        getProduce(produce);
+        console.log('cj: getting greenery', produce);
+    }, [getProduce, produce]);
 
     return (
         <div className='produce-list'>
-            {props.produce.map(item =>{
+            {produce.map(item =>{
                 return <Produce key={item.id} item={item}/>
             })}
         </div>
