@@ -24,7 +24,7 @@ const ShoppingCart = props => {
 
       <div>
         <p>Total: ${orderTotal()}</p>
-        <button onClick = {action_needed}>Checkout</button>
+        <button>Checkout</button>
       </div>
     </div>
   );
