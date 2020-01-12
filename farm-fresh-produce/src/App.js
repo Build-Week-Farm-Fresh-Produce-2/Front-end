@@ -14,18 +14,23 @@ import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import ProduceList from './Components/ProduceList';
 import ShoppingCart from './Components/ShoppingCart';
+import harvest from './img/HarvestDirect-logo.jpg';
+
 
 function App(props) {
   return (
     <div className="App">
-      <Route path="/" component={Nav} />
-      <Switch>
-        <Route exact path="/shop" component={ProduceList} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/cart" component={ShoppingCart} />
-        <Route path="/login" ><Login login={props.login} /></Route>
-        <Route path="/register" component={SignUp} />
-      </Switch>
+      <img src ={harvest} alt="vehicle" width='40%'/>
+      <div>
+        <Route path="/" component={Nav} />
+        <Switch>
+          <PrivateRoute exact path="/shop" component={ProduceList} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/cart" component={ShoppingCart} />
+          <Route path="/login" ><Login login={props.login} /></Route>
+          <Route path="/register" component={SignUp} />
+        </Switch>
+      </div>
     </div>
   );
 }

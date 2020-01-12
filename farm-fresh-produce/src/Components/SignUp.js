@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {axiosWithAuth} from "../Utils/axiosWithAuth";
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 import * as yup from "yup";
+import { Grid, Button, TextField } from "@material-ui/core";
 
 const schema = yup.object().shape({
   name: yup
@@ -60,60 +61,71 @@ const SignUp = () => {
   };
 
   return (
-    <div className="register-container">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            onChange={handleChange}
-            type="text"
-            name="name"
-            value={userState.name}
-          />
-          {errors.name}
-        </label>
-        <label>
-          Email:
-          <input
-            onChange={handleChange}
-            type="text"
-            name="email"
-            value={userState.email}
-          />
-          {errors.email}
-        </label>
-        <label>
-          Username:
-          <input
-            onChange={handleChange}
-            type="text"
-            name="username"
-            value={userState.username}
-          />
-          {errors.username}
-        </label>
-        <label>
-          Password:
-          <input
-            onChange={handleChange}
-            type="password"
-            name="password"
-            value={userState.password}
-          />
-          {errors.password}
-        </label>
-        <label>
-          I'm a Farmer:
-          <input
-            onChange={handleChange}
-            type="checkbox"
-            name="farmer"
-            checked={userState.farmer}
-          />
-        </label>
-
-        <button type="submit">Submit</button>
-      </form>
+    <div className="register-container" style={{ padding: 60 }}>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <form onSubmit={handleSubmit}>
+          <Grid container item xs={12} spacing={12}>
+            <label>
+              Name:  
+              <TextField
+                onChange={handleChange}
+                type="text"
+                name="name"
+                value={userState.name}
+              />
+              {errors.name}
+            </label>
+          </Grid><br/>
+          <Grid container item xs={12} spacing={12}>
+            <label>
+              Email:   
+              <TextField
+                onChange={handleChange}
+                type="text"
+                name="email"
+                value={userState.email}
+              />
+              {errors.email}
+            </label>
+          </Grid><br/>
+          <Grid container item xs={12} spacing={12}>
+            <label>
+              Username:  
+              <TextField
+                onChange={handleChange}
+                type="text"
+                name="username"
+                value={userState.username}
+              />
+              {errors.username}
+            </label>
+          </Grid><br/>
+          <Grid container item xs={12} spacing={12}>
+            <label>
+              Password:  
+              <TextField
+                onChange={handleChange}
+                type="password"
+                name="password"
+                value={userState.password}
+              />
+              {errors.password}
+            </label>
+          </Grid><br/>
+          <Grid container item xs={12} spacing={12}>
+            <label>
+              I'm a Farmer: 
+              <input
+                onChange={handleChange}
+                type="checkbox"
+                name="farmer"
+                checked={userState.farmer}
+              />
+            </label>
+          </Grid><br/>
+          <Button variant="contained" type="submit">Submit</Button>
+        </form>
+      </Grid>
     </div>
   );
 };

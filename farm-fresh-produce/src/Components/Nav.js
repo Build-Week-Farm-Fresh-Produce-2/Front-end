@@ -8,7 +8,7 @@ function Nav(props) {
       {
       //<Logo className="placeholder for logo from Web 1"></Logo>
       }
-      <h1>Harvest Direct</h1>
+      {/* <h1>Harvest Direct</h1> */}
       <nav>
         {/* connect to web 1 
         <Link to="/">Home</Link>
@@ -18,7 +18,7 @@ function Nav(props) {
         <Link to="/cart">Cart</Link>
         {props.user.isGrower ? <Link to="/dashboard">Dashboard</Link> : null}
         {props.user ? <Link to="/login">Login</Link> : null}
-          
+        <Link to='/register'>Sign Up</Link>  
       </nav>
     </div>
   );
