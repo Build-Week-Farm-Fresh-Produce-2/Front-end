@@ -5,8 +5,8 @@ const Item = props => {
   return (
     <div className="cart">
       <div className="produce-pic"></div>
-      <h3>{item.item_name}</h3>
-      <p>{item.user_description}</p>
+      <h3>{item.name}</h3>
+      <p>{item.description}</p>
       <p>${item.price}</p>
       <p>{item.item_quantity}</p>
       <button onClick={() => props.removeCart(item.id)}>Remove</button>

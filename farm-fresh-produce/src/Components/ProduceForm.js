@@ -7,7 +7,7 @@ const ProduceForm = props => {
     item_name: "",
     price: "",
     quantity: "",
-    id: Date.now(),
+    produce_id: Date.now(),
     user_description: ""
   });
 

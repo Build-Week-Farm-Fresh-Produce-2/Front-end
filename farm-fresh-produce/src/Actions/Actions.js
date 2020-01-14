@@ -75,8 +75,6 @@ export const login = userData => dispatch => {
 };
 
 export const getProduce = () => dispatch => {
-  // TODO: axiosWithAuth.get
-  // All of the farmers! All of their Inventories!
   axiosWithAuth()
     .get(`/produce`) // Fix this
     .then(res => {
@@ -109,7 +107,14 @@ export const getCart = uid => dispatch => {
 };
 
 export const addToCart = item => dispatch => {
-  // TODO: axiosWithAuth.post
+  axiosWithAuth()
+    .post(`/users/1/cart/`, item)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   dispatch({
     type: ADD_TO_CART,
     payload: item
@@ -117,7 +122,15 @@ export const addToCart = item => dispatch => {
 };
 
 export const removeCart = id => dispatch => {
-  // TODO: axiosWithAuth.delete
+  axiosWithAuth()
+    .delete(`/users/1/cart/${id}`)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
   dispatch({
     type: REMOVE_FROM_CART,
     payload: id
@@ -139,8 +152,9 @@ export const getInventory = () => dispatch => {
 };
 
 export const addToInventory = item => dispatch => {
+  console.log("gp: attempting to add to inventory")
   axiosWithAuth()
-    .post(`inventory/${item.id}`, item)
+    .post(`inventory/${item.produce_id}`, item)
     .then(res => {
       console.log(res);
       dispatch({
@@ -151,9 +165,15 @@ export const addToInventory = item => dispatch => {
     .catch(err => {
       console.log("error adding inventory", err.message);
     });
+    // because the endpoints aren't working
+    dispatch({
+      type: ADD_TO_INVENTORY,
+      payload: item
+    });
 };
 
 export const removeInventory = id => dispatch => {
+  console.log("gp: attempting to remove an item from inventory")
   axiosWithAuth()
     .delete(`inventory/${id}`)
     .then(res => {
@@ -166,12 +186,16 @@ export const removeInventory = id => dispatch => {
     .catch(err => {
       console.log("error removing inventory", err.message);
     });
+    // because the endpoints aren't working
+    dispatch({
+      type: REMOVE_FROM_INVENTORY,
+      payload: id
+    });
 };
 
 export const updateInventory = item => dispatch => {
-  // TODO: axiosWithAuth.put
   axiosWithAuth()
-    .put(`inventory/${item.id}`, item)
+    .put(`inventory/${item.produce_id}`, item)
     .then(res => {
       dispatch({
         type: UPDATE_INVENTORY_ITEM,
@@ -180,6 +204,11 @@ export const updateInventory = item => dispatch => {
     })
     .catch(err => {
       console.log("error changing inventory", err.message);
+    });
+    // because the endpoints aren't working
+    dispatch({
+      type: UPDATE_INVENTORY_ITEM,
+      payload: item
     });
 };
 

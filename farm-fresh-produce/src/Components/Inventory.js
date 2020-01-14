@@ -11,8 +11,10 @@ const FarmGoods = props => {
   let inventory = props.inventory;
   const getInventory = props.getInventory;
   useEffect(() => {
-    console.log("Rendering Inventory")
-    getInventory();
+    console.log("Rendering Inventory");
+    if (!inventory.length){
+      getInventory();
+    }
   }, [getInventory]);
 
   const handleUpdate = (item) => {
@@ -25,6 +27,7 @@ const FarmGoods = props => {
     <div>
       <button onClick={() => {props.history.push("/dashboard/form")}}>Add To Inventory</button><br/>
       {inventory.map(item => {
+        console.log("gp: itemlist", item);
         return (
           <div key={item.produce_id} className="prod-card">
             <h3>Name: {item.item_name}</h3>
@@ -32,7 +35,7 @@ const FarmGoods = props => {
             <p>Quantity: {item.quantity}</p>
             <p>Price: ${item.price}</p>
             <button onClick={()=>{handleUpdate(item)}}>Update</button><br/>
-            <button onClick={removeInventory}>Delete</button><br/>
+            <button onClick={()=>{props.removeInventory(item.produce_id)}}>Delete</button><br/>
           </div>
         );
       })}
