@@ -14,8 +14,10 @@ const ShoppingCart = props => {
       .toFixed(2);
   };
   useEffect(() => {
-    getCart(1);
-  }, [getCart])
+    if (!cart.length) {
+      getCart(1);
+    }
+  }, [cart, getCart])
   return (
     <div>
       {cart.map(item => (

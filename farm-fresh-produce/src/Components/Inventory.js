@@ -4,27 +4,34 @@ import {
   addToInventory,
   getInventory,
   removeInventory,
-  updateInventory
+  editItem
 } from "../Actions/Actions";
 
 const FarmGoods = props => {
-  let produce = props.produce;
+  let inventory = props.inventory;
   const getInventory = props.getInventory;
   useEffect(() => {
+    console.log("Rendering Inventory")
     getInventory();
   }, [getInventory]);
 
+  const handleUpdate = (item) => {
+    props.editItem(item);
+
+
+    // props.history.push("/dashboard/form");
+  }
   return (
     <div>
-      {produce.map(inventory => {
+      <button onClick={() => {props.history.push("/dashboard/form")}}>Add To Inventory</button><br/>
+      {inventory.map(item => {
         return (
-          <div className="prod-card">
-            <h3>Name: {inventory.name}</h3>
-            <p>Description: {inventory.description}</p>
-            <p>Quantity: {inventory.quantity}</p>
-            <p>Price: ${inventory.price}</p>
-            <button onClick={updateInventory}>Update</button><br/>
-            <button onClick={addToInventory}>Add Inventory</button><br/>
+          <div key={item.produce_id} className="prod-card">
+            <h3>Name: {item.item_name}</h3>
+            <p>Description: {item.user_description}</p>
+            <p>Quantity: {item.quantity}</p>
+            <p>Price: ${item.price}</p>
+            <button onClick={()=>{handleUpdate(item)}}>Update</button><br/>
             <button onClick={removeInventory}>Delete</button><br/>
           </div>
         );
@@ -34,7 +41,7 @@ const FarmGoods = props => {
 };
 
 const mapStateToProps = state => ({
-  produce: state.produce
+  inventory: state.inventory
 });
 
-export default connect(mapStateToProps, { updateInventory, addToInventory, getInventory, removeInventory })(FarmGoods);
+export default connect(mapStateToProps, { editItem, addToInventory, getInventory, removeInventory })(FarmGoods);
