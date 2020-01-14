@@ -12,11 +12,11 @@ const Orders = props => {
       {props.orders.map(item => {
         return (
           <div key={item.id}>
-            <a href="#" className="order-list">
+            <div className="order-list">
               <span>{item.order_date}</span>
               <span>{item.delivery_date}</span>
               <span>{item.user_id}</span>
-            </a>
+            </div>
           </div>
         );
       })}

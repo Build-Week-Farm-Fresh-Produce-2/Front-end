@@ -1,31 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { addToInventory, updateInventory } from "../Actions/Actions";
 
 const ProduceForm = props => {
   const [newFruit, setNewFruit] = useState({
-    name: "",
+    item_name: "",
     price: "",
-    unit: "",
+    quantity: "",
     id: Date.now(),
-    description: ""
+    user_description: ""
   });
+
+  useEffect(() => {
+    if (props.isEditing) {
+      setNewFruit(props.itemToEdit);
+      console.log("gp: newFruit", newFruit, props.itemToEdit);
+    }
+  }, [props.isEditing, props.itemToEdit, setNewFruit]);
 
   const handleSubmit = e => {
     e.preventDefault();
+    props.isEditing ? 
+    props.updateInventory(newFruit) : 
     props.addToInventory(newFruit);
-    props.updateInventory(newFruit);
     setNewFruit({
-      name: "",
+      item_name: "",
       price: "",
-      unit: "",
-      description: ""
+      quantity: "",
+      id: Date.now(),
+      user_description: ""
     });
     console.log("cj: adding new greens", newFruit);
   };
 
   const handleChange = e => {
-    let name = e.target.value;
     setNewFruit({
       ...newFruit,
       [e.target.name]: e.target.value
@@ -34,41 +42,47 @@ const ProduceForm = props => {
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
-          name="name"
+          name="item_name"
           type="text"
           placeholder="item name"
           onChange={handleChange}
-          value={newFruit.name}
+          value={newFruit.item_name}
         />
+  { /*     <input
+            name="price"
+            type="text"
+            placeholder="$$"
+            onChange={handleChange}
+            value={newFruit.price}
+          />
+    */}
         <input
-          name="price"
+          name="quantity"
           type="text"
-          placeholder="$$"
+          placeholder="quantity"
           onChange={handleChange}
-          value={newFruit.price}
+          value={newFruit.quantity}
         />
         <input
-          name="units"
-          type="text"
-          placeholder="lbs or oz"
-          onChange={handleChange}
-          value={newFruit.unit}
-        />
-        <input
-          name="description"
+          name="user_description"
           type="text"
           placeholder="describe product"
           onChange={handleChange}
-          value={newFruit.description}
+          value={newFruit.user_description}
         />
-        <button onClick={() => props.updateInventory(props.produce)}>
-          Update Inventory
+        <button>
+          {props.isEditing ? "Update Item" : "Add Item"}
         </button>
       </form>
     </div>
   );
 };
 
-export default connect(null, {addToInventory, updateInventory})(ProduceForm)
+const mapStateToProps = state => ({
+  isEditing: state.isEditing,
+  itemToEdit: state.itemToEdit
+})
+
+export default connect(mapStateToProps, {addToInventory, updateInventory})(ProduceForm)

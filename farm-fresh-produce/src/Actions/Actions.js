@@ -15,6 +15,7 @@ const GET_INVENTORY = "GET_INVENTORY";
 const ADD_TO_INVENTORY = "ADD_TO_INVENTORY";
 const REMOVE_FROM_INVENTORY = "REMOVE_FROM_INVENTORY";
 const UPDATE_INVENTORY_ITEM = "UPDATE_INVENTORY";
+const EDIT_ITEM = "EDIT_ITEM";
 
 // export const userInfo = () => dispatch => {
 //   const getUserInfo =
@@ -123,61 +124,69 @@ export const removeCart = id => dispatch => {
   });
 };
 
-export const getInventory = uid => dispatch => {
+export const getInventory = () => dispatch => {
+  console.log("gp: Trying to get inventory...");
   axiosWithAuth()
-    .get(`/users/${uid}/inventory`)
+    .get(`/inventory/`)
     .then(res => {
       console.log("Getting Inventory", res);
       dispatch({
         type: GET_INVENTORY,
-        payload: res.data.inventory
+        payload: res.data
       });
     })
     .catch(err => console.log(err.message));
 };
 
-export const addToInventory = id => dispatch => {
-  // TODO: axiosWithAuth.post
+export const addToInventory = item => dispatch => {
   axiosWithAuth()
-    .post(`api/inventory/propduce/${id}`)
+    .post(`inventory/${item.id}`, item)
     .then(res => {
+      console.log(res);
       dispatch({
         type: ADD_TO_INVENTORY,
-        payload: res.data.id
+        payload: res.data
       });
     })
     .catch(err => {
-      console.log("error adding inventory", err.res.data.message);
+      console.log("error adding inventory", err.message);
     });
 };
 
 export const removeInventory = id => dispatch => {
-  // TODO: axiosWithAuth.delete
   axiosWithAuth()
-    .delete(`api/inventory/propduce/${id}`)
+    .delete(`inventory/${id}`)
     .then(res => {
-      console.log("deleting", res.data.message);
+      console.log("deleting", res.data);
       dispatch({
         type: REMOVE_FROM_INVENTORY,
         payload: id
       });
     })
     .catch(err => {
-      console.log("error removing inventory", err.res.data.message);
+      console.log("error removing inventory", err.message);
     });
 };
 
-export const updateInventory = id => dispatch => {
+export const updateInventory = item => dispatch => {
   // TODO: axiosWithAuth.put
   axiosWithAuth()
-    .put(`api/inventory/propduce/${id}`)
+    .put(`inventory/${item.id}`, item)
     .then(res => {
       dispatch({
         type: UPDATE_INVENTORY_ITEM,
-        payload: res.data.message
+        payload: res.data
       });
     })
     .catch(err => {
-      console.log("error changing inventory", err.res.data.message);
+      console.log("error changing inventory", err.message);
     });
 };
+
+export const editItem = item => dispatch => {
+  console.log("gp: item to edit", item)
+  dispatch({
+    type: EDIT_ITEM,
+    payload: item
+  });
+}
